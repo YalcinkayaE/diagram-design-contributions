@@ -234,6 +234,22 @@ def main() -> int:
         1,
     )
     check(
+        "diagonal connector with adjacent attributes",
+        document(f'<line x1="10" y1="10"x2="60" y2="40" {arrow}/>'),
+        1,
+    )
+    check(
+        "diagonal connector with slash between attributes",
+        document(f'<line x1="10" y1="10"/x2="60" y2="40" {arrow}/>'),
+        1,
+    )
+    check(
+        "attribute-like coordinates inside an unusual name are ignored",
+        document(f'<line @click=" x1=\'10\' y1=\'10\' x2=\'60\' y2=\'10\'" '
+                 f'x1="10" y1="10" x2="60" y2="40" {arrow}/>'),
+        1,
+    )
+    check(
         "single-quoted arrowed path",
         document("<path d='M 10 10 L 60 40' stroke='#4f5d75' marker-end='url(#arrow)'/>"),
         1,
